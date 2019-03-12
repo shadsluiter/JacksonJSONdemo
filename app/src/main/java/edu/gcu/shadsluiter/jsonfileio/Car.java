@@ -3,6 +3,7 @@ package edu.gcu.shadsluiter.jsonfileio;
 public class Car {
 
     int year;
+    String make;
 
     @Override
     public String toString() {
@@ -37,5 +38,5 @@ public class Car {
         this.make = make;
     }
 
-    String make;
+
 }

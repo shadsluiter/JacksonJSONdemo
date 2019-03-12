@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
 
-    Button btn_load, btn_save, btn_addcar, btn_clearlist;
+    Button btn_load, btn_save, btn_addcar, btn_clearlist, btn_fourcars;
     TextView tv_output;
     CarList list = new CarList();
 
@@ -26,18 +26,8 @@ public class MainActivity extends AppCompatActivity {
         tv_output = findViewById(R.id.tv_output);
         btn_addcar = findViewById(R.id.btn_addcar);
         btn_clearlist = findViewById(R.id.btn_clearlist);
+        btn_fourcars = findViewById(R.id.btn_fourcars);
 
-        tv_output.setText(list.toString());
-
-
-        Car c1 = new Car(2020, "Ford");
-        Car c2 = new Car(1993, "Chevy");
-        Car c3 = new Car(1982, "Dodge");
-        Car c4 = new Car(2019, "Buik");
-        list.getCarList().add(c1);
-        list.getCarList().add(c2);
-        list.getCarList().add(c3);
-        list.getCarList().add(c4);
         tv_output.setText(list.toString());
 
         btn_addcar.setOnClickListener(new View.OnClickListener() {
@@ -46,6 +36,21 @@ public class MainActivity extends AppCompatActivity {
                 Car c1 = new Car(2010, "Corvette");
                 list.getCarList().add(c1);
                 Toast.makeText(MainActivity.this, "Added " + c1.toString(), Toast.LENGTH_SHORT).show();
+                tv_output.setText(list.toString());
+            }
+        });
+
+        btn_fourcars.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Car c1 = new Car(2020, "Ford");
+                Car c2 = new Car(1993, "Chevy");
+                Car c3 = new Car(1982, "Dodge");
+                Car c4 = new Car(2019, "Buik");
+                list.getCarList().add(c1);
+                list.getCarList().add(c2);
+                list.getCarList().add(c3);
+                list.getCarList().add(c4);
                 tv_output.setText(list.toString());
             }
         });
@@ -63,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
             DataService dataService = new DataService(v.getContext());
-            dataService.writeList(list, "cars.json");
+            dataService.writeList(list, "cars.txt");
 
             }
         });
@@ -73,11 +78,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DataService dataService = new DataService(v.getContext());
-                list =  dataService.readList("cars.json");
+                list =  dataService.readList("cars.txt");
 
                 tv_output.setText(list.toString());
             }
         });
+
 
     }
 }
